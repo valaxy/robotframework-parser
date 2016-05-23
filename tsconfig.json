@@ -1,0 +1,12 @@
+{
+    "compilerOptions": {
+        "module":      "commonjs",
+        "target":      "es6",
+        "outDir":      "dest/",
+        "declaration": true
+    },
+    "exclude":         [
+        "dest/",
+        "node_modules/ace-builds/"
+    ]
+}

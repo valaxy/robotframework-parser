@@ -1,0 +1,18 @@
+@charset "utf-8";
+
+.ace_head {
+    font-weight: bold;
+    color:       white;
+}
+
+.ace_separator {
+}
+
+.ace_separator::before {
+    position: absolute;
+    content:  '..'
+}
+
+.ace_cell {
+    color: #447fcf;
+}

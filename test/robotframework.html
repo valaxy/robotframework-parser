@@ -1,0 +1,37 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>robotframework ace editor</title>
+    <style>
+        #editor {
+            margin:   0;
+            position: absolute;
+            top:      0;
+            bottom:   0;
+            left:     0;
+            right:    0;
+        }
+    </style>
+    <link rel="stylesheet" href="../lib/ace/theme-robotframework.css">
+</head>
+<body>
+    <pre id="editor"></pre>
+
+    <script src="../node_modules/ace-builds/src-noconflict/ace.js"></script>
+    <script>
+        ace.config.set('modePath', '/robotframework-parser/dest/lib/ace/')
+
+        let editor = ace.edit("editor")
+        editor.setTheme("ace/theme/twilight")
+        editor.session.setMode("ace/mode/robotframework")
+
+        editor.session.setValue(`*** Test Case ***
+    Open Browser    \${LOGIN URL}    \${BROWSER}
+    Maximize Browser Window
+    Set Selenium Speed    \${DELAY}
+    Login Page Should Be Open
+        `)
+    </script>
+</body>
+</html>

@@ -1,0 +1,29 @@
+{
+  "name": "robotframework-parser",
+  "version": "0.1.0-dev",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "http://git.code.oa.com/tianyuzou/robotframework-parser.git"
+  },
+  "license": "MIT",
+  "dependencies": {
+    "ace-builds": "^1.2.2",
+    "pegjs": "^0.9.0",
+    "pegjs-builder": "github:valaxy/pegjs-builder#caf4c3ddd03fc1e97c10ed270ecec2bf0bf8c655"
+  },
+  "devDependencies": {
+    "cjs": "github:valaxy/cjs#56d3496c933731ff3ba37578ace17d23bdf7fb8d",
+    "gulp": "^3.9.1",
+    "gulp-util": "^3.0.7",
+    "gulp-watch": "^4.3.5",
+    "qunitjs": "^2.0.0-rc1",
+    "requirejs": "^2.2.0",
+    "text": "github:requirejs/text#d04de4ffd7bf5ba6cb80cdca2d40d4f6f52a1b1f",
+    "through2": "^2.0.1"
+  }
+}
