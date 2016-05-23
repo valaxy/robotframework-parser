@@ -1,12 +1,33 @@
-ace.define("ace/mode/robotframework_highlight_rules", ["require", "exports", "module", "ace/lib/oop", "ace/mode/text_highlight_rules"], function (require, exports) {
+ace.define("ace/mode/robotframework_highlight_rules", ["require", "exports"], function (require, exports) {
     let oop                = require("../lib/oop")
     let TextHighlightRules = require("./text_highlight_rules").TextHighlightRules
 
-    let RobotframeworkHighlightRules = function () {
-        let separator = {
-            token: 'separator',
-            regex: /(?:(?:  )|(?: \t)|\t)[ \t]*/
+    // ace不支持regexp的i标识
+    let createRegexpWithI = function (keywords:string[]) {
+        let reg = ''
+        for (let keyword of keywords) {
+            for (let i = 0; i < keyword.length; i++) {
+                let ch = keyword[i]
+                reg += `[${ch.toLowerCase()}${ch.toUpperCase()}]`
+            }
+            reg += '|'
         }
+        reg = reg.slice(0, reg.length - 1)
+        return reg
+    }
+
+    let RobotframeworkHighlightRules = function () {
+        let caseName = {
+            token: 'case_name',
+            regex: /[a-zA-Z0-9_ ]+/
+        }
+
+        let keywords = createRegexpWithI([
+            'open browser',
+            'maximize browser window',
+            'set selenium speed',
+            'login page should be open'
+        ])
 
         this.$rules = { // 不匹配换行符的
             start: [{
@@ -16,26 +37,34 @@ ace.define("ace/mode/robotframework_highlight_rules", ["require", "exports", "mo
             }, {
                 token: 'head',
                 regex: /\*.*/,
-                next : 'row'
-            }],
+                next : 'start'
+            }, Object.assign({
+                next: 'cellEnd'
+            }, caseName)],
 
-            row: [{
-                token: 'head',
-                regex: /\*.*/,
-                next : 'row'
-            }, Object.assign(separator, {
-                next: 'cellStart'
-            })],
+            cellEnd: [{
+                token: 'separator',
+                regex: /(?:(?:  )|(?: \t)|\t)[ \t]*/,
+                next : 'cellStart'
+            }, Object.assign({
+                next: 'cellEnd'
+            }, caseName)],
 
             cellStart: [{
-                token: 'cell',
+                token: 'argument',
+                regex: /\$\{[a-zA-Z0-9 ]+}/,
+                next : 'cellEnd'
+            }, {
+                token: 'cell', // 其他的
                 regex: /(?:(?: (?! ))|[^ \t])*[^ \t]/,
                 next : 'cellEnd'
-            }],
+            }]
 
-            cellEnd: [Object.assign(separator, {
-                next: 'cellStart'
-            })]
+            //{
+            //    token: 'keyword',
+            //        regex: keywords,
+            //    next : 'cellEnd'
+            //},
         }
     }
 

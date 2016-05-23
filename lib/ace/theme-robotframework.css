@@ -16,3 +16,11 @@
 .ace_cell {
     color: #447fcf;
 }
+
+.ace_case_name {
+    color: red;
+}
+
+.ace_argument {
+    color: #8dd0ff;
+}
